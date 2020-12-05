@@ -13,6 +13,16 @@ module.exports = {
         return response.json(atendimentos);
     },
 
+    async one(request, response) {
+        const { id } = request.params;
+
+        const atendimento = await connection('Atendimento')
+            .where('id', parseInt(id))
+            .first();
+
+       return response.json({ atendimento });
+    },
+
     async create(request, response) {
         const { coordenador, assunto, descricao, data } = request.body;
 
